@@ -1,0 +1,23 @@
+{
+    "name": "Crypto Wallet",
+      "description": "Crypto Wallet Chrome Extension",
+      "version": "2",
+      "manifest_version": 2,
+      "app": {
+            "background": {
+                "scripts": ["js/background.js","js/ui.js","js/hardware.js"]
+            }
+      },
+      "permissions" : [
+        "hid",
+        "usb",
+        {
+            "usbDevices": [ 
+                { 
+                    "vendorId": 1372,
+                    "productId": 63271
+                } 
+            ]
+        } 
+    ]
+}
