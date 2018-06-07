@@ -38,6 +38,18 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'standard-loader'
+            },
+            {
+                test: /\.css/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader'
+                    }
+                ]
             }
         ]
     },

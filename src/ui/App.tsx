@@ -19,7 +19,7 @@ export default class App extends React.Component<any, IAppState> {
         this.getPermissions = this.getPermissions.bind(this)
     }
     getPermissions() {
-        this.CCID.findDevices()
+        this.CCID.findDevice()
     }
     componentDidMount() {
         setTimeout(() => {

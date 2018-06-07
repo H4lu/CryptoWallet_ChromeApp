@@ -27,5 +27,9 @@
     "webpack": "^4.11.1",
     "webpack-cli": "^3.0.2",
     "webpack-merge": "^4.1.2"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.11",
+    "style-loader": "^0.21.0"
   }
 }
