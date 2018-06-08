@@ -1,7 +1,15 @@
 const webpack = require('webpack');
 const path = require('path');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
+    devtool: 'cheap-module-source-map',
+    mode: 'production',
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: "[name].css"
+        })
+    ],
     entry: {
         hardware: path.join(__dirname, '../src/hardware/CCID.ts'),
         ui: path.join(__dirname, '../src/ui/Index.tsx')
@@ -40,17 +48,25 @@ module.exports = {
                 loader: 'standard-loader'
             },
             {
-                test: /\.css/,
+                test: /\.css$/,
+                exclude: /node_modules/,
+                use:[ MiniCssExtractPlugin.loader,
+                    "css-loader"
+                ]
+            },
+            /*{
+                test: /\.css$/,
                 exclude: /node_modules/,
                 use: [
-                    {
-                        loader: 'style-loader'
-                    },
-                    {
-                        loader: 'css-loader'
-                    }
+                  {
+                    loader: 'style-loader'
+                  },
+                  {
+                    loader: 'css-loader'
+                  }
                 ]
-            }
+              }
+              */
         ]
     },
     resolve: {

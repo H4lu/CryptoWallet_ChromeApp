@@ -16,8 +16,6 @@ export default class CCid {
     private VID: number = 0x055C
     private PID: number = 0xF727
     device:chrome.usb.Device
-    openDev = promisify(chrome.usb.openDevice)
-    findDev = promisify(chrome.usb.getDevices)
     constructor() {
     }
     private openDeviceAsync() {
