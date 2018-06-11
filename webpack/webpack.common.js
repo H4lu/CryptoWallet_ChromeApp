@@ -3,7 +3,6 @@ const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-    devtool: 'cheap-module-source-map',
     mode: 'production',
     plugins: [
         new MiniCssExtractPlugin({

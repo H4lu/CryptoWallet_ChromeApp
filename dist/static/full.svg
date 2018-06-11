@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="10"
+   height="8"
+   viewBox="0 0 10 8"
+   version="1.1"
+   id="svg328"
+   sodipodi:docname="full.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <metadata
+     id="metadata332">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Group 4</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     id="namedview330"
+     showgrid="false"
+     inkscape:zoom="17.475248"
+     inkscape:cx="19.320267"
+     inkscape:cy="-0.18660005"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg328" />
+  <title
+     id="title308">Group 4</title>
+  <desc
+     id="desc310">Created using Figma</desc>
+  <g
+     id="Canvas"
+     transform="matrix(0.9947014,0,0,0.79431167,-4851.1086,400.38649)"
+     inkscape:transform-center-x="-0.79755515"
+     inkscape:transform-center-y="-0.27272203">
+    <g
+       id="Group 4">
+      <g
+         id="Subtract">
+        <use
+           xlink:href="#path2_fill"
+           transform="translate(4877,-504)"
+           id="use318"
+           style="fill:#718ea8"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%" />
+      </g>
+    </g>
+  </g>
+  <defs
+     id="defs326">
+    <path
+       id="path0_fill"
+       d="M 0,0 H 10 V 1 H 0 Z"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path1_fill"
+       d="M 4.28564,5 0,9.28574 0.714355,10 5,5.71436 9.28564,10 10,9.28574 5.71436,5 10,0.714294 9.28564,0 5,4.28568 0.714355,0 0,0.714294 Z"
+       inkscape:connector-curvature="0"
+       style="fill-rule:evenodd" />
+    <path
+       id="path2_fill"
+       d="M 10,0 H 0 V 10 H 10 Z M 9,1 H 1 v 8 h 8 z"
+       inkscape:connector-curvature="0"
+       style="fill-rule:evenodd" />
+  </defs>
+</svg>

@@ -17,6 +17,7 @@ export default class CCid {
     private PID: number = 0xF727
     device:chrome.usb.Device
     constructor() {
+        console.log('CCID CREATED')
     }
     private openDeviceAsync() {
 

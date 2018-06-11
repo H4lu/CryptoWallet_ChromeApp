@@ -19,12 +19,5 @@
                 } 
             ]
         } 
-    ],
-    "sandbox": {
-        "pages": [
-            "main.html"
-        ]
-       
-    }
-   
+    ]
 }

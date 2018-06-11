@@ -355,8 +355,11 @@ background: linear-gradient(140deg, rgba(41, 62, 85, 0.4) 0%, rgba(20,27,33,0.5)
 }
 
 body, html {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: block;
   height: 100vh;
-
 }
 .content {
   height: 90vh;
