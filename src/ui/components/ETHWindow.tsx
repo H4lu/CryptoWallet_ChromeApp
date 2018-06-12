@@ -1,7 +1,7 @@
 import * as React from 'react'
 import CreateQR from '../../core/CreateQR'
 import { getEthereumAddress } from '../../crypto/Ethereum'
-import { Table } from '../primitive/Table'
+import  Table  from '../primitive/Table'
 import { sendTransaction } from '../../core/SendTransaction'
 import { ETHEREUM_PATH } from '../../core/paths'
 interface IETHWindowState {
@@ -12,7 +12,7 @@ interface IETHWindowState {
   fee: number
 }
 
-export class ETHWIndow extends React.Component<any, IETHWindowState> {
+export default class ETHWIndow extends React.Component<any, IETHWindowState> {
   constructor(props: any) {
     super(props)
 

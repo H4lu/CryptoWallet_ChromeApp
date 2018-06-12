@@ -44,6 +44,7 @@ export default class MainWindow extends React.Component<IMainWindowProps, IMainW
         }
     
         // <img src = '../static/logo.svg'/>
+
         return(
             <div className = 'window-main'>
                 <div className = 'main-window-flex-container'>

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import CreateQR from '../../core/CreateQR'
 import { getBitcoinAddress } from '../../crypto/Bitcoin' 
-import { Table } from '../primitive/Table'
+import  Table  from '../primitive/Table'
 import { sendTransaction } from '../../core/SendTransaction'
 import { BITCOIN_PATH } from '../../core/paths'
 interface IBTCWindowState {
@@ -12,7 +12,7 @@ interface IBTCWindowState {
   fee: number
 }
 
-export class BTCWindow extends React.Component<any, IBTCWindowState> {
+export default class BTCWindow extends React.Component<any, IBTCWindowState> {
   constructor(props: any) {
     super(props)
 

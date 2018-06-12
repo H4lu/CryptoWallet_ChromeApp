@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { TableRow } from './TableRow'
 interface ITableClass {
   dataToRender: Array<any>
@@ -8,7 +8,7 @@ interface ITableProps {
   type: string
 }
 
-export class Table extends React.Component<ITableProps,ITableClass> {
+export default class Table extends React.Component<ITableProps,ITableClass> {
   constructor(props: any) {
     super(props)
 

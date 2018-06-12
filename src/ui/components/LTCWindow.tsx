@@ -2,7 +2,7 @@ import * as React from 'react'
 import CreateQR from '../../core/CreateQR'
 import { getLitecoinAddress } from '../../crypto/Litecoin'
 import { sendTransaction } from '../../core/SendTransaction'
-import { Table } from '../primitive/Table'
+import  Table  from '../primitive/Table'
 import { LITECOIN_PATH } from '../../core/paths'
 interface ILTCWindowState {
   address: string,
@@ -14,7 +14,7 @@ interface ILTCWindowState {
 
 
 
-export class LTCWindow extends React.Component<any, ILTCWindowState> {
+export default class LTCWindow extends React.Component<any, ILTCWindowState> {
   constructor(props: any) {
     super(props)
 

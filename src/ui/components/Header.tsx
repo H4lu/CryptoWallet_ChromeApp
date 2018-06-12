@@ -1,10 +1,5 @@
 import * as React from 'react'
 
-declare global {
-  interface Window {
-    hide : any
-  }
-}
 
 export default class Header extends React.Component<any, any> {
   constructor(props: any) {
@@ -21,7 +16,7 @@ export default class Header extends React.Component<any, any> {
     chrome.app.window.current().close()
   }
   fullscreenWindow() {
-    if (chrome.app.window.current().isMaximized()) {
+    if (chrome.app.window.current().isFullscreen()) {
       chrome.app.window.current().restore()
     } else {
       chrome.app.window.current().fullscreen()
@@ -36,7 +31,6 @@ export default class Header extends React.Component<any, any> {
           <button className = 'button-hide' onClick = {this.hideWindow}/>
           <button className = 'button-fullscreen' onClick = {this.fullscreenWindow}/>
           <button className = 'button-close' onClick = {this.closeWindow}/>
-
         </div>
       </div>
     </div>
