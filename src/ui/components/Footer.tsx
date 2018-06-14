@@ -17,7 +17,7 @@ export default class Footer extends React.Component<any, any> {
     return (
     <div className = 'footer'>
       <div className = 'footer-content'>
-        <p className = 'version'>Version 1.1</p>
+        <p className = 'footer-version'>Version 1.1</p>
         {(this.props.connection) ? (
           this.renderStatusOK()
         ) : (

@@ -27,7 +27,7 @@ export default class MainContent extends React.Component<any, any> {
               </div>
               <hr/>
               <div className = 'card-bottom-block'>
-              <div>
+              <div className = 'card-bottom-crypto-text'>
                    <p className = 'currency-amount-crypto text-inline'> {this.props.btcBalance}</p><p className = 'currency-short-name text-inline'>BTC</p>
                   </div>
                   <div className = 'wrap'>
@@ -47,7 +47,7 @@ export default class MainContent extends React.Component<any, any> {
               </div>
               <hr/>
               <div className = 'card-bottom-block'>
-                <div>
+                <div className = 'card-bottom-crypto-text'>
                   <p className = 'currency-amount-crypto text-inline'> {this.props.ethBalance}</p><p className = 'currency-short-name text-inline'>ETH </p>
                 </div>
                 <div className = 'wrap'>
@@ -67,7 +67,7 @@ export default class MainContent extends React.Component<any, any> {
               </div>
               <hr/>
               <div className = 'card-bottom-block'>
-                <div>
+                <div className = 'card-bottom-crypto-text'>
                    <p className = 'currency-amount-crypto text-inline'> {this.props.ltcBalance}</p><p className = 'currency-short-name text-inline'>LTC </p>
                 </div>
                 <div className = 'wrap'>

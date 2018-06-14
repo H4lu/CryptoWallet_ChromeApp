@@ -4,6 +4,7 @@ import { getLitecoinAddress } from '../../crypto/Litecoin'
 import { sendTransaction } from '../../core/SendTransaction'
 import  Table  from '../primitive/Table'
 import { LITECOIN_PATH } from '../../core/paths'
+
 interface ILTCWindowState {
   address: string,
   qrcodeAddress: string,
@@ -11,8 +12,6 @@ interface ILTCWindowState {
   amount: number,
   fee: number
 }
-
-
 
 export default class LTCWindow extends React.Component<any, ILTCWindowState> {
   constructor(props: any) {
@@ -68,15 +67,15 @@ export default class LTCWindow extends React.Component<any, ILTCWindowState> {
                 </div>
                 <hr/>
                 <div className = 'card-bottom-block'>
-                <div>
+                <div className = 'card-bottom-crypto-text'>
                     <p className = 'currency-amount-crypto text-inline'>{this.props.balance}</p>
                     <p className = 'currency-short-name text-inline'>LTC</p>
                     </div>
                     <div className = 'wrap'>
                       {(this.props.hourChange > 0) ? (
-                        <p className = 'positive-percentage text-inline'>{this.props.hourChange}%</p>
+                        <p className = 'positive-percentage'>{this.props.hourChange}%</p>
                       ) : (
-                        <p className = 'negative-percentage text-inline'>{this.props.hourChange}%</p>
+                        <p className = 'negative-percentage'>{this.props.hourChange}%</p>
                       )}
                     <p className = 'currency-amount-fiat text-inline'>{this.props.price}$</p>
                     </div>

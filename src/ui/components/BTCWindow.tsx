@@ -65,7 +65,7 @@ export default class BTCWindow extends React.Component<any, IBTCWindowState> {
                 </div>
                 <hr/>
                 <div className = 'card-bottom-block'>
-                <div>
+                <div className = 'card-bottom-crypto-text'>
                     <p className = 'currency-amount-crypto text-inline'>{this.props.balance}</p>
                     <p className = 'currency-short-name text-inline'>BTC</p>
                     </div>

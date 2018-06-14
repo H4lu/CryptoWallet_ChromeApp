@@ -40,3 +40,19 @@ export function handleEthereum(address: string, amount: number, fee: number, gas
 export function getEthereumAddress(): string {
     return
 }
+export function initEthereumAddress(): Promise<any> {
+    return
+
+}
+export function getEthereumLastTx() {
+
+}
+export function setETHBalance( balance: number ) {
+
+}
+export function getETHBalance(): Promise<any> {
+    return
+}
+export function setETHPrice(price: number) {
+
+}

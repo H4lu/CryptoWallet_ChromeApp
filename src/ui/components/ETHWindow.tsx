@@ -63,7 +63,7 @@ export default class ETHWIndow extends React.Component<any, IETHWindowState> {
               </div>
               <hr/>
               <div className = 'card-bottom-block'>
-              <div>
+              <div className = 'card-bottom-crypto-text'>
                    <p className = 'currency-amount-crypto text-inline'>{this.props.balance}</p><p className = 'currency-short-name text-inline'>ETH</p>
                   </div>
                   <div className = 'wrap'>

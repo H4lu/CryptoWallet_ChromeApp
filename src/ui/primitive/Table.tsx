@@ -1,8 +1,10 @@
 import * as React from 'react'
 import { TableRow } from './TableRow'
+
 interface ITableClass {
   dataToRender: Array<any>
 }
+
 interface ITableProps {
   data: Array<Object>,
   type: string
