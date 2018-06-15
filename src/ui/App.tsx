@@ -192,7 +192,7 @@ export default class App extends React.Component<any, IAppState> {
     componentWillMount() {
         this.setState({ redirect: true })
     }
-    componentDidMount() {
+    async componentDidMount() {
         getBitcoinSmartBitBalance()
         getETBALANCE()
         this.getRates()
@@ -200,6 +200,13 @@ export default class App extends React.Component<any, IAppState> {
             this.getPermissions()
             this.setState({ redirectToMain: true })
         }, 300,[])
+        /* let res = await CCID.findDevice()
+        let open = await CCID.openDevice()
+        let inter = await CCID.listInterfaces()
+        let intrf = await CCID.claimInterface()
+        let conf = await CCID.getConfiguration()
+        */
+        
     }
     setValues() {
         setBTCBalance(this.state.BTCBalance)
