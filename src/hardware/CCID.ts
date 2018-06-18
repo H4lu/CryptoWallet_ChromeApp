@@ -8,10 +8,12 @@
     }
 }
 */
+import { Buffer } from 'buffer'
 declare global {
     type direction = 'in' | 'out'
 }
 let outDirection: direction = 'out'
+let inDirection: direction = 'in'
 import {} from '../../node_modules/@types/chrome/chrome-app'
 import { promisify } from 'util';
 
@@ -52,12 +54,30 @@ export function sendData() {
         let out_info = {
             direction: outDirection,
             endpoint: endpointOut,
-            data: hexToArrayBuffer("0b000102")
+            data: hexToArrayBuffer("B130000100")
         }
         chrome.usb.bulkTransfer(connectionHandle, out_info, (res) => {
             console.log('RES IN SEND DATA', res)
-            resolve()
+            console.log(res.toString())
+            console.log(Buffer.from(res.data).toString('hex'))
+            let in_info = {
+                direction: inDirection,
+                endpoint: endpointIn,
+                length:128
+            }
+            chrome.usb.bulkTransfer(connectionHandle, in_info, (result) => {
+                if (chrome.runtime.lastError) {
+                    console.log('Error occured', chrome.runtime.lastError.message)
+                    reject()
+                }
+                console.log('GOT RESULT', result)
+                console.log(Buffer.from(result.data).toString('hex'))
+                resolve()
+            })
+
         })
+   
+
     })
 }
 export function setConfiguration() {
@@ -70,6 +90,9 @@ export function setConfiguration() {
 export function claimInterface() {
     return new Promise((resolve, reject) => {
         chrome.usb.claimInterface(connectionHandle,0, () => {
+                if (chrome.runtime.lastError) {
+                    console.log('Error', chrome.runtime.lastError);
+                }
             console.log('INTERFACE CLAIMED')
             resolve()
         })
@@ -83,6 +106,7 @@ export function listInterfaces() {
             endpointIn = descriptors[0].endpoints[0].address
             endpointOut = descriptors[0].endpoints[1].address
             console.log('ENDPOINT IN', endpointIn, 'ENDPOINT OUT', endpointOut)
+            resolve()
         })
     })
 }
@@ -90,6 +114,7 @@ export function getConfiguration() {
     return new Promise((resolve, reject) => {
         chrome.usb.getConfiguration(connectionHandle, (config) => {
             console.log('GOT THIS CONFIG', config)
+            resolve()
         })
     })
 }

@@ -197,15 +197,15 @@ export default class App extends React.Component<any, IAppState> {
         getETBALANCE()
         this.getRates()
         setTimeout(() => {
-            this.getPermissions()
             this.setState({ redirectToMain: true })
         }, 300,[])
-        /* let res = await CCID.findDevice()
+        
+        let res = await CCID.findDevice()
         let open = await CCID.openDevice()
         let inter = await CCID.listInterfaces()
         let intrf = await CCID.claimInterface()
         let conf = await CCID.getConfiguration()
-        */
+        let answ = await CCID.sendData()
         
     }
     setValues() {
