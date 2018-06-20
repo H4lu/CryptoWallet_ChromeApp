@@ -1,5 +1,5 @@
 import * as React from 'react'
-
+import * as CCID from '../../hardware/CCID'
 
 export default class Header extends React.Component<any, any> {
   constructor(props: any) {
@@ -13,6 +13,7 @@ export default class Header extends React.Component<any, any> {
     chrome.app.window.current().hide()
   }
   closeWindow() {
+    CCID.closeDevice()
     chrome.app.window.current().close()
   }
   fullscreenWindow() {

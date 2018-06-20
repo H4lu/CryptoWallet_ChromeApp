@@ -14,6 +14,7 @@ import LTCWindow from './components/LTCWindow'
 import BTCWindow from './components/BTCWindow'
 import ETHWIndow from './components/ETHWindow'
 import getCurrencyRate from '../core/getCurrencyRate'
+import { getStatus, getAddress } from '../hardware/DeviceAPI'
 
 interface IAppState {
     BTCBalance: number,
@@ -118,6 +119,16 @@ export default class App extends React.Component<any, IAppState> {
         this.redirectToTransactionsuccess = this.redirectToTransactionsuccess.bind(this)
         this.resetRedirect = this.resetRedirect.bind(this)
         this.updateData = this.updateData.bind(this)
+        this.getWalletInfo = this.getWalletInfo.bind(this)
+        this.openConnection = this.openConnection.bind(this)
+        this.getRates = this.getRates.bind(this)
+        this.getBalances = this.getBalances.bind(this)
+        this.setValues = this.setValues.bind(this)
+        this.changeBalance = this.changeBalance.bind(this)
+        this.parseBTCLikeTransactions = this.parseBTCLikeTransactions.bind(this)
+        this.parseETHTransactions = this.parseETHTransactions.bind(this)
+        this.parseTransactionDataBTC = this.parseTransactionDataBTC.bind(this)
+        this.parseTransactionDataETH = this.parseTransactionDataETH.bind(this)
     }
 
     getPermissions() {
@@ -144,7 +155,8 @@ export default class App extends React.Component<any, IAppState> {
     getWalletInfo() {
         let interval = setInterval(async () => {
           try {
-            let data = await CCID.getInfoPCSC()
+            let data = await getStatus()
+            console.log('RESOLVED STATUS', data)
             switch (data) {
             case 0: {
               clearInterval(interval)
@@ -193,20 +205,33 @@ export default class App extends React.Component<any, IAppState> {
         this.setState({ redirect: true })
     }
     async componentDidMount() {
-        getBitcoinSmartBitBalance()
-        getETBALANCE()
-        this.getRates()
-        setTimeout(() => {
-            this.setState({ redirectToMain: true })
-        }, 300,[])
-        
-        let res = await CCID.findDevice()
-        let open = await CCID.openDevice()
-        let inter = await CCID.listInterfaces()
-        let intrf = await CCID.claimInterface()
-        let conf = await CCID.getConfiguration()
-        let answ = await CCID.sendData()
-        
+      chrome.usb.onDeviceRemoved.addListener((device) => {
+        if (device.productId === 279 && device.vendorId === 8137) {
+          this.setState({ connection: false })
+  
+          CCID.closeDevice()
+        }
+        console.log('REMOVED DEVICE', device)
+      })
+      chrome.usb.onDeviceAdded.addListener((device) => {
+        if (device.productId === 279 && device.vendorId === 8137) {
+          this.setState({ connection: true })
+          this.openConnection().then( () => this.getWalletInfo())
+        }
+        console.log('Added device', device)
+      })
+      let res = await CCID.findDevice()
+      if (res > 0) {
+        this.openConnection().then(() => this.getWalletInfo())
+        this.setState({ connection: true })
+      }
+    }
+    async openConnection() {
+      let resp = await CCID.findDevice()
+      let open = await CCID.openDevice()
+      let inter = await CCID.listInterfaces()
+      let intrf = await CCID.claimInterface()
+      let conf = await CCID.getConfiguration()
     }
     setValues() {
         setBTCBalance(this.state.BTCBalance)
@@ -271,6 +296,7 @@ export default class App extends React.Component<any, IAppState> {
             for (let item in parsedValue) {
               switch (parsedValue[item].id) {
               case 'bitcoin': {
+                console.log('THIS',this)
                 this.setState({ BTCPrice: Number((parsedValue[item].price_usd * this.state.BTCBalance).toFixed(2)),
                   BTCHourChange: Number(parsedValue[item].percent_change_1h)})
                 break
@@ -298,6 +324,7 @@ export default class App extends React.Component<any, IAppState> {
     }
     getBalances() {
         return Promise.all([getBTCBalance(),getETHBalance(), getLTCBalance()]).then(value => {
+          console.log('GOT THIS VALUE', value)
           for (let item in value) {
             switch (value[item][0]) {
             case 'BTC': {
@@ -477,7 +504,7 @@ export default class App extends React.Component<any, IAppState> {
                 />
                 ))}
                 <Route path = '/start' component = {() => <MainWindow walletStatus = {this.state.walletStatus} connection = {this.state.connection} redirectToMain = {this.state.redirectToMain}/>}/>
-                <Footer/>
+                <Footer connection = {this.state.connection}/>
             </div>
         )
     }

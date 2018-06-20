@@ -9,6 +9,8 @@ import * as satoshi from 'satoshi-bitcoin'
 import * as wif from 'wif'
 import * as CCID from '../hardware/CCID'
 import { Buffer } from 'buffer'
+import { getAddress } from '../hardware/DeviceAPI'
+
 // const urlSmartbit = 'https://testnet-api.smartbit.com.au/v1/blockchain/pushtx'
 const urlChainSo = 'https://chain.so/api/v2/send_tx/'
 const network = networks.bitcoin
@@ -17,6 +19,16 @@ const rootURL = 'https://chain.so/api/v2'
 let myAddr = ''
 let balance: number
 let price: number
+
+export async function initBitcoinAddress() {
+  return new Promise(async (resolve) => {
+    let addr = await getAddress(0)
+    setMyAddress(addr)
+    console.log('BITCOIN ADDRESS', myAddr)
+    resolve()
+  })
+}
+
 export function setBTCBalance(bal: number) {
   balance = bal
 }
@@ -59,11 +71,11 @@ function parseValueCrypto(response: webRequest.Response<string>): Array<any> {
   return arr
 }
 
-export async function initBitcoinAddress() {
+/* export async function initBitcoinAddress() {
   /*
   myAddr = await getAddressPCSC(0)
   console.log('BTC ADDRESS', myAddr)
-  */
+  
   console.log('INITING BTC ADDRESS')
 
   return new Promise(async (resolve) => {
@@ -95,8 +107,9 @@ export async function initBitcoinAddress() {
   //
 // })
 
-  })
-}
+//  })
+//}
+
 function setMyAddress(address: string) {
   myAddr = address
   console.log('MY ADDRESS BITCOIN:' + myAddr)
