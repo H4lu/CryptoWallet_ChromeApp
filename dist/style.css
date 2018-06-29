@@ -357,17 +357,31 @@ background: linear-gradient(140deg, rgba(41, 62, 85, 0.4) 0%, rgba(20,27,33,0.5)
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(7, 1, 1, 0.986);
 }
-.currencies-container {
+/*.currencies-container {
   margin-top: 5px;
   margin-bottom: 5px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
+  overflow-x: scroll;
+}
+*/
+.currencies-container {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  min-width: 100%;
+  min-height: 165px;
+  display: flex;
+  overflow-x: auto;
+}
+.currencies-container::-webkit-scrollbar {
+  display: none;
 }
 
 body, html {
   margin: 0;
+  display: flex;
   padding: 0;
   border: 0;
   display: block;

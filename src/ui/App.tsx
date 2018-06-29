@@ -15,6 +15,8 @@ import BTCWindow from './components/BTCWindow'
 import ETHWIndow from './components/ETHWindow'
 import getCurrencyRate from '../core/getCurrencyRate'
 import { getStatus, getAddress } from '../hardware/DeviceAPI'
+import { connectToRipple } from '../crypto/Ripple'
+import RippleWindow from '../ui/components/RippleWindow'
 
 interface IAppState {
     BTCBalance: number,
@@ -85,6 +87,12 @@ export default class App extends React.Component<any, IAppState> {
             let d = new Date(b.Date).getTime()
             return d - c
           })} transactions = {this.getTransactions} redirect = {this.redirectToTransactionsuccess} reset = {this.resetRedirect}/>
+        },
+        {
+          path: '/ripple-window',
+          exact: true,
+          sidebar: () => <SidebarNoButtons total = {this.state.totalBalance} totalPercent = {this.state.totalPercentage}/>,
+          main: () => <RippleWindow/>
         }
       ]
     constructor(props: any) {
@@ -205,6 +213,9 @@ export default class App extends React.Component<any, IAppState> {
         this.setState({ redirect: true })
     }
     async componentDidMount() {
+      this.setState({ connection: true })
+      this.setRedirectToMain()
+      connectToRipple()
       chrome.usb.onDeviceRemoved.addListener((device) => {
         if (device.productId === 279 && device.vendorId === 8137) {
           this.setState({ connection: false })

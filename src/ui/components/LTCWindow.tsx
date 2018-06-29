@@ -67,20 +67,20 @@ export default class LTCWindow extends React.Component<any, ILTCWindowState> {
                 </div>
                 <hr/>
                 <div className = 'card-bottom-block'>
-                <div className = 'card-bottom-crypto-text'>
-                    <p className = 'currency-amount-crypto text-inline'>{this.props.balance}</p>
-                    <p className = 'currency-short-name text-inline'>LTC</p>
-                    </div>
-                    <div className = 'wrap'>
-                      {(this.props.hourChange > 0) ? (
-                        <p className = 'positive-percentage'>{this.props.hourChange}%</p>
-                      ) : (
-                        <p className = 'negative-percentage'>{this.props.hourChange}%</p>
-                      )}
-                    <p className = 'currency-amount-fiat text-inline'>{this.props.price}$</p>
-                    </div>
+                  <div className = 'card-bottom-crypto-text'>
+                      <p className = 'currency-amount-crypto text-inline'>{this.props.balance}</p>
+                      <p className = 'currency-short-name text-inline'>LTC</p>
+                      </div>
+                      <div className = 'wrap'>
+                        {(this.props.hourChange > 0) ? (
+                          <p className = 'positive-percentage'>{this.props.hourChange}%</p>
+                        ) : (
+                          <p className = 'negative-percentage'>{this.props.hourChange}%</p>
+                        )}
+                      <p className = 'currency-amount-fiat text-inline'>{this.props.price}$</p>
+                      </div>
+                  </div>
                 </div>
-              </div>
               </div>
               <div className = 'currency-block-transaction'>
               <header className = 'default-font-colored'>Send Bitcoin</header>

@@ -11,3 +11,4 @@ export const REFRESH_BUTTON_PATH = path.resolve(__dirname, '../static/i_update.s
 export const TRANSACTION_SUCCESS = path.resolve(__dirname, '../static/Group5.svg')
 export const LOGO_SMALL = path.resolve(__dirname, '../static/logo_small.svg')
 export const BTN_MENU_PATH = path.resolve(__dirname, '../static/btn_menu.svg')
+export const RIPPLE_PATH = path.resolve(__dirname, '../static/Ripple_logo.svg')

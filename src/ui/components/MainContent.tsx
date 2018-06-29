@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import  Table  from '../primitive/Table'
-import { ETHEREUM_PATH, BITCOIN_PATH, LITECOIN_PATH } from '../../core/paths'
+import { ETHEREUM_PATH, BITCOIN_PATH, LITECOIN_PATH, RIPPLE_PATH } from '../../core/paths'
 
 export default class MainContent extends React.Component<any, any> {
   constructor(props: any) {
@@ -19,7 +19,7 @@ export default class MainContent extends React.Component<any, any> {
       <div className = 'main-content'>
           <div className = 'currency-block'>
             <header className = 'currencies-header'>Cryptocurrency: </header>
-          <div className = 'currencies-container'>
+          <section className = 'currencies-container'>
             <Link to = '/btc-window' className = 'card-container'>
               <div className = 'card-upper-block'>
                 <img src = {BITCOIN_PATH}/>
@@ -81,7 +81,27 @@ export default class MainContent extends React.Component<any, any> {
                 </div>
                 </div>
             </Link>
-           </div>
+            <Link to = '/ripple-window' className = 'card-container'>
+              <div className = 'card-upper-block'>
+                <img src = {RIPPLE_PATH}/>
+                <p className = 'currency-name'> Ripple</p>
+              </div>
+              <hr/>
+              <div className = 'card-bottom-block'>
+              <div className = 'card-bottom-crypto-text'>
+                   <p className = 'currency-amount-crypto text-inline'> {this.props.btcBalance}</p><p className = 'currency-short-name text-inline'>XRP</p>
+                  </div>
+                  <div className = 'wrap'>
+                    {(this.props.btcHourChange > 0) ? (
+                      <p className = 'positive-percentage text-inline'>{this.props.btcHourChange}%</p>
+                    ) : (
+                      <p className = 'negative-percentage text-inline'>{this.props.btcHourChange}%</p>
+                    )}
+                   <p className = 'currency-amount-fiat text-inline'>{this.props.btcPrice}$</p>
+                   </div>
+              </div>
+            </Link>
+           </section>
            <hr/>
           </div>
          <Table data = {this.props.lastTx} type = 'normal'/>

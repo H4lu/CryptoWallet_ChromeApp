@@ -7,7 +7,7 @@ export function handleLitecoin(address: string, amount: number, fee: number, red
 
 }
 export function getLitecoinAddress(): string {
-    return
+    return address
 }
 export function initLitecoinAddress() {
     return new Promise(async (resolve) => {

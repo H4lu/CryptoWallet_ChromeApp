@@ -13,8 +13,13 @@ export default class Header extends React.Component<any, any> {
     chrome.app.window.current().hide()
   }
   closeWindow() {
-    CCID.closeDevice()
-    chrome.app.window.current().close()
+    if (CCID.getHandle() === undefined) {
+      chrome.app.window.current().close()
+    } else {
+      CCID.closeDevice()
+      chrome.app.window.current().close()
+    }
+
   }
   fullscreenWindow() {
     if (chrome.app.window.current().isFullscreen()) {

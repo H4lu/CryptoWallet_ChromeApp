@@ -48,6 +48,9 @@ function openDeviceAsync() {
         })
     })
 }
+export function getHandle() {
+    console.log('My connection handle', connectionHandle)
+}
 export function initTransmit() {
     sendPowerOffMessage().then(sendPowerOnMessage).then(sendSetParameterMessage)
 }
@@ -143,7 +146,7 @@ function hexToArrayBuffer(h: any) {
     return result;
 }
 
-function transreceive(message: ArrayBuffer): Promise<chrome.usb.TransferResultInfo> {
+function transreceive(message: ArrayBuffer): Promise<Buffer> {
     return new Promise((resolve, reject) => {
         let out_info = {
             direction: outDirection,
@@ -166,7 +169,7 @@ function transreceive(message: ArrayBuffer): Promise<chrome.usb.TransferResultIn
                 }
                 console.log('GOT RESULT', result)
                 console.log(Buffer.from(result.data).toString('hex'))
-                resolve(result)
+                resolve(Buffer.from(result.data))
             })
         })
     })
