@@ -1,6 +1,7 @@
 import { getAddress } from '../hardware/DeviceAPI'
 import * as webRequest from 'web-request'
 
+const rootURL = 'https://chain.so/api/v2'
 let address = ''
 const NETWORK = 'LTC'
 export function handleLitecoin(address: string, amount: number, fee: number, redirect: Function) {
@@ -18,12 +19,19 @@ export function initLitecoinAddress() {
     })
 
 }
-export function getLitecoinLastTx() {
-
+export async function getLitecoinLastTx() {
+  try {
+    const requestUrl = rootURL + '/address/' + NETWORK + '/' + address
+    const response = await webRequest.get(requestUrl)
+    return response
+  } catch (err) {
+  }
 }
+
 export function setLTCBalance (balance: number) {
 
 }
+
 export async function getLTCBalance(): Promise<Array<Number | String>> {
     /* Задаём параметры запроса
       Network - тип сети, testnet или mainnet

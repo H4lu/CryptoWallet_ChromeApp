@@ -4,8 +4,9 @@ import * as CCID from '../hardware/CCID'
 import MainWindow from './components/MainWindow'
 import Header from './components/Header'
 import Footer  from './components/Footer';
-import { getBitcoinSmartBitBalance, initBitcoinAddress, setBTCBalance, setBTCPrice, getBitcoinLastTx, getBTCBalance } from '../crypto/Bitcoin'
-import { getETBALANCE, initEthereumAddress, setETHBalance, setETHPrice, getEthereumLastTx, getEthereumAddress, getETHBalance } from '../crypto/Ethereum'
+import Bitcoin from '../crypto/Bitcoin'
+import { getBitcoinSmartBitBalance, initBitcoinAddress, setBTCBalance, setBTCPrice, getBitcoinLastTx, getBTCBalance, } from '../crypto/Bitcoin'
+import { initEthereumAddress, setETHBalance, setETHPrice, getEthereumLastTx, getEthereumAddress, getETHBalance } from '../crypto/Ethereum'
 import { getLitecoinAddress, getLitecoinLastTx, getLTCBalance, initLitecoinAddress, setLTCBalance, setLTCPrice } from '../crypto/Litecoin'
 import SidebarNoButtons from './components/SidebarNoButtons'
 import SidebarContent from './components/SidebarContent'
@@ -14,7 +15,7 @@ import LTCWindow from './components/LTCWindow'
 import BTCWindow from './components/BTCWindow'
 import ETHWIndow from './components/ETHWindow'
 import getCurrencyRate from '../core/getCurrencyRate'
-import { getStatus, getAddress } from '../hardware/DeviceAPI'
+import { getStatus, getAddress, updateHWStatus } from '../hardware/DeviceAPI'
 import { connectToRipple } from '../crypto/Ripple'
 import RippleWindow from '../ui/components/RippleWindow'
 
@@ -197,7 +198,7 @@ export default class App extends React.Component<any, IAppState> {
     initAll() {
         if (this.state.allowInit) {
           this.setState({ allowInit: false })
-          initBitcoinAddress().then(initEthereumAddress).then(initLitecoinAddress).then(this.getRates).then(this.getBalances).then(this.getTransactions).then(() => CCID.UpdateHWStatusPCSC(this.state.BTCBalance, this.state.BTCPrice, this.state.ETHBalance, this.state.ETHPrice, this.state.LTCBalance, this.state.LTCPrice)).then(() => {
+          initBitcoinAddress().then(initEthereumAddress).then(initLitecoinAddress).then(this.getBalances).then(this.getRates).then(this.getTransactions).then(() => updateHWStatus(this.state.BTCBalance, this.state.BTCPrice, this.state.ETHBalance, this.state.ETHPrice, this.state.LTCBalance, this.state.LTCPrice)).then(() => {
             this.setRedirectToMain()
             this.setValues()
           })
@@ -213,9 +214,7 @@ export default class App extends React.Component<any, IAppState> {
         this.setState({ redirect: true })
     }
     async componentDidMount() {
-      this.setState({ connection: true })
-      this.setRedirectToMain()
-      connectToRipple()
+ 
       chrome.usb.onDeviceRemoved.addListener((device) => {
         if (device.productId === 279 && device.vendorId === 8137) {
           this.setState({ connection: false })
@@ -255,7 +254,7 @@ export default class App extends React.Component<any, IAppState> {
       updateData() {
         this.getTransactions().then(this.getBalances)
         .then(() => {
-          CCID.UpdateHWStatusPCSC(this.state.BTCBalance, this.state.BTCPrice, this.state.ETHBalance, this.state.ETHPrice, this.state.LTCBalance, this.state.LTCPrice)
+          updateHWStatus(this.state.BTCBalance, this.state.BTCPrice, this.state.ETHBalance, this.state.ETHPrice, this.state.LTCBalance, this.state.LTCPrice)
         }).then(this.getRates)
       }
       changeBalance(currency: string, amount: number) {
@@ -271,7 +270,7 @@ export default class App extends React.Component<any, IAppState> {
         case 'LTC': {
           this.setState({ LTCBalance: (this.state.LTCBalance - amount) })
         }
-        }
+      }
     }
     addUnconfirmedTx(currency: string, amount: number, address: string, hash: string) {
         let currentDate = new Date()

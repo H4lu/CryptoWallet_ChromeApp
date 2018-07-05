@@ -101,6 +101,126 @@ export default class MainContent extends React.Component<any, any> {
                    </div>
               </div>
             </Link>
+            <Link to = '/eth-window' className = 'card-container'>
+              <div className = 'card-upper-block'>
+                <img src = {ETHEREUM_PATH}/>
+                <p className = 'currency-name'>Ethereum</p>
+              </div>
+              <hr/>
+              <div className = 'card-bottom-block'>
+                <div className = 'card-bottom-crypto-text'>
+                  <p className = 'currency-amount-crypto text-inline'> {this.props.ethBalance}</p><p className = 'currency-short-name text-inline'>ETH </p>
+                </div>
+                <div className = 'wrap'>
+                  {(this.props.ethHourChange > 0) ? (
+                    <p className = 'positive-percentage text-inline'>{this.props.ethHourChange}%</p>
+                  ) : (
+                    <p className = 'negative-percentage text-inline'>{this.props.ethHourChange}%</p>
+                  )}
+                  <p className = 'currency-amount-fiat text-inline'>{this .props.ethPrice}$</p>
+                </div>
+              </div>
+            </Link>
+            <Link to = '/eth-window' className = 'card-container'>
+              <div className = 'card-upper-block'>
+                <img src = {ETHEREUM_PATH}/>
+                <p className = 'currency-name'>Ethereum</p>
+              </div>
+              <hr/>
+              <div className = 'card-bottom-block'>
+                <div className = 'card-bottom-crypto-text'>
+                  <p className = 'currency-amount-crypto text-inline'> {this.props.ethBalance}</p><p className = 'currency-short-name text-inline'>ETH </p>
+                </div>
+                <div className = 'wrap'>
+                  {(this.props.ethHourChange > 0) ? (
+                    <p className = 'positive-percentage text-inline'>{this.props.ethHourChange}%</p>
+                  ) : (
+                    <p className = 'negative-percentage text-inline'>{this.props.ethHourChange}%</p>
+                  )}
+                  <p className = 'currency-amount-fiat text-inline'>{this .props.ethPrice}$</p>
+                </div>
+              </div>
+            </Link>
+            <Link to = '/eth-window' className = 'card-container'>
+              <div className = 'card-upper-block'>
+                <img src = {ETHEREUM_PATH}/>
+                <p className = 'currency-name'>Ethereum</p>
+              </div>
+              <hr/>
+              <div className = 'card-bottom-block'>
+                <div className = 'card-bottom-crypto-text'>
+                  <p className = 'currency-amount-crypto text-inline'> {this.props.ethBalance}</p><p className = 'currency-short-name text-inline'>ETH </p>
+                </div>
+                <div className = 'wrap'>
+                  {(this.props.ethHourChange > 0) ? (
+                    <p className = 'positive-percentage text-inline'>{this.props.ethHourChange}%</p>
+                  ) : (
+                    <p className = 'negative-percentage text-inline'>{this.props.ethHourChange}%</p>
+                  )}
+                  <p className = 'currency-amount-fiat text-inline'>{this .props.ethPrice}$</p>
+                </div>
+              </div>
+            </Link>
+            <Link to = '/eth-window' className = 'card-container'>
+              <div className = 'card-upper-block'>
+                <img src = {ETHEREUM_PATH}/>
+                <p className = 'currency-name'>Ethereum</p>
+              </div>
+              <hr/>
+              <div className = 'card-bottom-block'>
+                <div className = 'card-bottom-crypto-text'>
+                  <p className = 'currency-amount-crypto text-inline'> {this.props.ethBalance}</p><p className = 'currency-short-name text-inline'>ETH </p>
+                </div>
+                <div className = 'wrap'>
+                  {(this.props.ethHourChange > 0) ? (
+                    <p className = 'positive-percentage text-inline'>{this.props.ethHourChange}%</p>
+                  ) : (
+                    <p className = 'negative-percentage text-inline'>{this.props.ethHourChange}%</p>
+                  )}
+                  <p className = 'currency-amount-fiat text-inline'>{this .props.ethPrice}$</p>
+                </div>
+              </div>
+            </Link>
+            <Link to = '/eth-window' className = 'card-container'>
+              <div className = 'card-upper-block'>
+                <img src = {ETHEREUM_PATH}/>
+                <p className = 'currency-name'>Ethereum</p>
+              </div>
+              <hr/>
+              <div className = 'card-bottom-block'>
+                <div className = 'card-bottom-crypto-text'>
+                  <p className = 'currency-amount-crypto text-inline'> {this.props.ethBalance}</p><p className = 'currency-short-name text-inline'>ETH </p>
+                </div>
+                <div className = 'wrap'>
+                  {(this.props.ethHourChange > 0) ? (
+                    <p className = 'positive-percentage text-inline'>{this.props.ethHourChange}%</p>
+                  ) : (
+                    <p className = 'negative-percentage text-inline'>{this.props.ethHourChange}%</p>
+                  )}
+                  <p className = 'currency-amount-fiat text-inline'>{this .props.ethPrice}$</p>
+                </div>
+              </div>
+            </Link>
+            <Link to = '/eth-window' className = 'card-container'>
+              <div className = 'card-upper-block'>
+                <img src = {ETHEREUM_PATH}/>
+                <p className = 'currency-name'>Ethereum</p>
+              </div>
+              <hr/>
+              <div className = 'card-bottom-block'>
+                <div className = 'card-bottom-crypto-text'>
+                  <p className = 'currency-amount-crypto text-inline'> {this.props.ethBalance}</p><p className = 'currency-short-name text-inline'>ETH </p>
+                </div>
+                <div className = 'wrap'>
+                  {(this.props.ethHourChange > 0) ? (
+                    <p className = 'positive-percentage text-inline'>{this.props.ethHourChange}%</p>
+                  ) : (
+                    <p className = 'negative-percentage text-inline'>{this.props.ethHourChange}%</p>
+                  )}
+                  <p className = 'currency-amount-fiat text-inline'>{this .props.ethPrice}$</p>
+                </div>
+              </div>
+            </Link>
            </section>
            <hr/>
           </div>

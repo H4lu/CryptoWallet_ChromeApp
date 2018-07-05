@@ -105,6 +105,24 @@ function sendSetParameterMessage() {
 
 
 }
+function newXfrBlockMessageFromBuffer(data: Buffer) {
+    let message = new Array(10)
+    message[0] = kMessageType_PC_to_RDR_XfrBlock
+    let data_length = data.length
+    message[1] = data_length & 0xFF
+    message[2] = (data_length >> 8) & 0xFF
+    message[3] = (data_length >> 16) & 0xFF
+    message[4] = (data_length >> 24) & 0xFF
+    message[5] = _slot
+    message[6] = _seq
+    // message = message.concat(data)
+    const txData = new  Uint8Array(message).buffer
+    console.log('TRANSFERRRIGN THIS',new Uint8Array(message).buffer)
+    let temp = new Uint8Array(txData.byteLength + data.buffer.byteLength)
+    temp.set(new Uint8Array(txData),0)
+    temp.set(new Uint8Array(data.buffer),txData.byteLength)
+    return temp.buffer
+}
 function newXfrBlockMessage(data: any) {
     let message = new Array(10)
     message[0] = kMessageType_PC_to_RDR_XfrBlock
@@ -116,8 +134,14 @@ function newXfrBlockMessage(data: any) {
     message[5] = _slot
     message[6] = _seq
     message = message.concat(data)
+    console.log('TRANSFERRRIGN THIS',new Uint8Array(message).buffer)
     return new Uint8Array(message).buffer
 
+}
+export function sendBuffer(message: any) {
+    let data = newXfrBlockMessageFromBuffer(message)
+    _seq++
+    return transreceive(data)
 }
 function sendXfrBlockMessage(message: any) {
     let data = newXfrBlockMessage(message)
@@ -153,10 +177,11 @@ function transreceive(message: ArrayBuffer): Promise<Buffer> {
             endpoint: endpointOut,
             data: message
         }
+        console.log('TRANSFERING MESSAGE', message)
         chrome.usb.bulkTransfer(connectionHandle, out_info, (res) => {
             console.log('RES IN SEND DATA', res)
             console.log(res.toString())
-            console.log(Buffer.from(res.data).toString('hex'))
+            console.log('RES IN SEND DATA',Buffer.from(res.data).toString('hex'))
             let in_info = {
                 direction: inDirection,
                 endpoint: endpointIn,

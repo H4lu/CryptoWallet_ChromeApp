@@ -132,9 +132,10 @@ button {
   margin: 5px;
 }
 .card-container {
-  flex-grow: 1;
-  min-width: 25%;
+  flex-grow: 1; 
+  flex: 0 0 auto;
   display: block;
+   min-width: 25%;
   width: 218px;
   height: 124px;;
   background: #25384F;
@@ -368,17 +369,32 @@ background: linear-gradient(140deg, rgba(41, 62, 85, 0.4) 0%, rgba(20,27,33,0.5)
 }
 */
 .currencies-container {
+  -webkit-overflow-scrolling: touch;
   margin-top: 5px;
   margin-bottom: 5px;
   min-width: 100%;
   min-height: 165px;
   display: flex;
+  flex-wrap: nowrap;
   overflow-x: auto;
 }
+
 .currencies-container::-webkit-scrollbar {
   display: none;
 }
 
+.currencies-container::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+.currencies-container::-webkit-scrollbar-corner {
+  background: inherit;
+}
+.currencies-container::-webkit-scrollbar-thumb {
+  background-color: #2B4059;
+}
+
+.tr
 body, html {
   margin: 0;
   display: flex;
@@ -489,8 +505,8 @@ button:active {
   flex-direction: row;
 }
 .transaction-history {
-  min-height: 65vh;
-  max-height: 70vh;
+  min-height: 20vh;
+  max-height: 60vh;
   overflow: scroll;
   margin-left: auto;
   margin-right: auto;

@@ -10,8 +10,9 @@ declare global {
         ethereumjs: any
     }
 }
-
-let connectionConfiguration = {
+const provider = new ethers.providers.InfuraProvider('mainnet','hgAaKEDG9sIpNHqt8UYM')
+let address = ''
+const connectionConfiguration = {
     httpAddresses: ['https://api.myetherapi.com/rop'],
     wsAddresses:[],
     ipcAddresses: [], // optional, default empty array
@@ -19,23 +20,20 @@ let connectionConfiguration = {
         console.log('ERROR OCCURED',err)
      }, // optional, used for errors that can't be correlated back to a request
   };
-let address = ''
 
-export function getETBALANCE() {
-    // let web3 = new window.Web3(new window.Web3.providers.HttpProvider('https://ropsten.infura.io/hgAaKEDG9sIpNHqt8UYM'))
-    // console.log('web3 object', web3)
-    let eth = ethers
-    console.log('ETH', eth)
-    console.log('ETHERERER', ethers)
-    console.log('ETHERS', (<any> window).ethers)
-    console.log('Window', window,window.ethers,window['ethers'])
-    let prov = new ethers.providers.InfuraProvider('ropsten','hgAaKEDG9sIpNHqt8UYM')
-    console.log('PROV', prov)
-    let provider = eth.providers.getDefaultProvider()
-    console.log('DEFAULT PROVIDER', provider)
-    prov.getBalance('0x619B30BE614ce453035058736cd2B83c34373Ddd').then(value => {
-        console.log('GOT THIS BALANCE',ethers.utils.formatEther(value))
+
+export async function getETHBalance() {
+    return new Promise( async (resolve) => {
+        console.log('provider', provider)
+        const balance = await provider.getBalance(address)
+        let arr = []
+        arr.push('ETH')
+        arr.push(ethers.utils.formatEther(balance))
+        resolve(arr)
     })
+    // let web3 = new window.Web3(new window.Web3.provideriders.Httpproviderider('https://ropsten.infura.io/hgAaKEDG9sIpNHqt8UYM'))
+    // console.log('web3 object', web3)
+
     // console.log(web3.eth.getBalance('0x619B30BE614ce453035058736cd2B83c34373Ddd'))
 }
 
@@ -43,14 +41,20 @@ export function handleEthereum(address: string, amount: number, fee: number, gas
 
 }
 export function getEthereumAddress(): string {
-    return
+    return address
 }
 export async function initEthereumAddress(): Promise<any> {
     return new Promise(async (resolve) => {
-        let addr = await getAddress(1)
-        address = addr
-        console.log('ETHEREUM ADDRESS', address)
-        resolve()
+        let status = false
+        while (!status) {
+            const addr = await getAddress(1)
+            if (addr.length > 38) {
+                address = ethers.utils.getAddress(addr)
+                console.log('ETHEREUM ADDRESS', address)
+                status = true
+                resolve()
+            } 
+        }
     })
 
 }
@@ -80,24 +84,25 @@ async function createTransaction(paymentAddress: string, amount: number, gasPric
         chainId: 3
     }
 }
-export function getETHBalance(): Promise<any> {
+/*export function getETHBalance(): Promise<any> {
     return new Promise((resolve) => {
         let eth = ethers
         console.log('ETH', eth)
         console.log('ETHERERER', ethers)
         console.log('ETHERS', (<any> window).ethers)
         console.log('Window', window,window.ethers,window['ethers'])
-        let prov = new ethers.providers.InfuraProvider('ropsten','hgAaKEDG9sIpNHqt8UYM')
-        console.log('PROV', prov)
-        let provider = eth.providers.getDefaultProvider()
-        console.log('DEFAULT PROVIDER', provider)
-        prov.getBalance('0x619B30BE614ce453035058736cd2B83c34373Ddd').then(value => {
+        let provider = new ethers.provideriders.Infuraproviderider('ropsten','hgAaKEDG9sIpNHqt8UYM')
+        console.log('provider', provider)
+        let providerider = eth.provideriders.getDefaultproviderider()
+        console.log('DEFAULT providerIDER', providerider)
+        provider.getBalance('0x619B30BE614ce453035058736cd2B83c34373Ddd').then(value => {
             console.log('GOT THIS BALANCE',ethers.utils.formatEther(value))
             resolve(ethers.utils.formatEther(value))
         })
     })
 
 }
+*/
 export function setETHPrice(price: number) {
 
 }

@@ -55,7 +55,9 @@ export async function updateHWStatus(...data) {
     }
     const xorBuf = Buffer.from([xor])
     const dataBuf = Buffer.concat([Buffer.from([0xB1,0x50,0x00]), xorBuf, Buffer.from([0x60]), message])
-    await CCID.sendAPDU(dataBuf)
+    console.log('DATABUF', dataBuf, dataBuf.buffer)
+    await CCID.sendBuffer(dataBuf)
+    return
 }
 
 export async function getSignature(id: number, message: Array<Buffer>, address: string, amount: number, numberOfInputs: number) {
@@ -89,7 +91,7 @@ export async function getSignature(id: number, message: Array<Buffer>, address: 
         const LeBuf = Buffer.from([Le])
         const dataBuf = Buffer.from([0xB1,0x40,numberOfInputsBuf, idBuf, LeBuf, amountBuf, Buffer.from(address), xorBuf])
         const initMessage = Buffer.concat([Buffer.from([0xB1,0x40,numberOfInputsBuf, idBuf, LeBuf, amountBuf]), Buffer.from(address), xorBuf])
-        const answer = await CCID.sendAPDU(initMessage)
+        const answer = await CCID.sendBuffer(initMessage)
         if (answer.toString('hex') === '9000') {
             let sigArray: Array<Buffer> = []
             for (let i = 0; i < numberOfInputs; i++) {
@@ -109,7 +111,7 @@ function sendDataMessage(inputNumber: Buffer, currencyId: Buffer, hash: Buffer):
     const xorBuf = Buffer.from([xor])
     return new Promise(async (resolve, reject) => {
         const dataBuf = Buffer.from([0xB1, 0x41, inputNumber, currencyId, 0x20, hash, xorBuf])
-        const answer = await CCID.sendAPDU(dataBuf)
+        const answer = await CCID.sendBuffer(dataBuf)
         resolve(answer) 
     })
 }
