@@ -29,7 +29,8 @@ export default class Bitcoin {
       let status = false 
       while (!status) {
         const addr = await getAddress(0)
-        if (addr.length > 16) {
+        console.log('ADDRESS RESPONSE', addr, addr[0])
+        if (addr.length > 16 && addr[0] === '1') {
           status = true
           this.address = addr
           console.log('MY ADDRESSSSSSS', this.address, addr)
@@ -56,20 +57,21 @@ export default class Bitcoin {
     }
   }
   private createTransaction() {
-    
+
   }
   public prepareTx() {
     this.getLastTransactionData()
   }
 }
 export async function initBitcoinAddress() {
-  let BTC = new Bitcoin()
-  BTC.initBitcoinAddress().then(() => BTC.prepareTx())
+  // let BTC = new Bitcoin()
+  // BTC.initBitcoinAddress().then(() => BTC.prepareTx())
   return new Promise(async (resolve) => {
     let status = false 
     while (!status) {
       const addr = await getAddress(0)
-      if (addr.length > 16) {
+      console.log('BTC ADDRESS RESPONSE', addr, addr[0])
+      if (addr.length > 16 && addr[0] === '1') {
         status = true
         setMyAddress(addr)
         console.log('BITCOIN ADDRESS', myAddr)
@@ -80,20 +82,24 @@ export async function initBitcoinAddress() {
 }
 
 export async function getLastTransactionData(): Promise<any> {
-  const requestUrl: string = 'https://chain.so/api/v2/get_tx_unspent/' + NETWORK + '/' + myAddr
-  console.log('GET LAST TRANSACTION DATA', requestUrl)
-  console.log('ADDRESS AT THE MOMENT', myAddr)
-  console.log('https://chain.so/api/v2/get_tx_unspent/' + NETWORK + '/' + myAddr)
-  try {
-    const response = await webRequest.get(requestUrl)
-    console.log('Raw response: ' + response.content)
-    console.log('Response of last tx: ' + JSON.parse(response.content).data.txs)
-    return response
-  } catch (error) {
-    Promise.reject(error).catch(error => {
-      console.log(error)
+  return new Promise((resolve, reject) => {
+    initBitcoinAddress().then(async () => {
+      const requestUrl: string = 'https://chain.so/api/v2/get_tx_unspent/' + NETWORK + '/' + myAddr
+      console.log('GET LAST TRANSACTION DATA', requestUrl)
+      console.log('ADDRESS AT THE MOMENT', myAddr)
+      console.log('https://chain.so/api/v2/get_tx_unspent/' + NETWORK + '/' + myAddr)
+      try {
+        const response = await webRequest.get(requestUrl)
+        console.log('Raw response: ' + response.content)
+        console.log('Response of last tx: ' + JSON.parse(response.content).data.txs)
+        resolve(response)
+      } catch (error) {
+         reject(error)
+      }
     })
-  }
+  })
+
+
 }
 export function setBTCBalance(bal: number) {
   balance = bal

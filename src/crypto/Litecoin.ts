@@ -12,10 +12,18 @@ export function getLitecoinAddress(): string {
 }
 export function initLitecoinAddress() {
     return new Promise(async (resolve) => {
+      let status = false
+      while (!status) {
         let addr = await getAddress(2)
-        address = addr
-        console.log('LITECOIN ADDRESS', address)
-        resolve()
+        if (addr.length > 16 && addr[0] === 'L') {
+          address = addr
+          status = true
+          console.log('LITECOIN ADDRESS', address)
+          resolve()
+        }
+
+      }
+  
     })
 
 }
