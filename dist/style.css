@@ -609,6 +609,16 @@ th {
 .address-with-button {
   margin-left: 5px;
 }
+.address-qrcode {
+  display: block;
+  float: right;
+  /*height: 80px;
+  width: 80px;*/
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
 .button-copy {
   width: 94px;
   height: 30px;
@@ -1085,3 +1095,4 @@ input::-webkit-input-placeholder {
   align-items: center;
   flex-direction: row;
 }
+

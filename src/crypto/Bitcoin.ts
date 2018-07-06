@@ -9,7 +9,7 @@ import * as satoshi from 'satoshi-bitcoin'
 import * as wif from 'wif'
 import * as CCID from '../hardware/CCID'
 import { Buffer } from 'buffer'
-import { getAddress, getSignature } from '../hardware/DeviceAPI'
+import { getAddress, getSignature, getSignatureKostil } from '../hardware/DeviceAPI'
 import * as crypto from 'crypto'
 // const urlSmartbit = 'https://testnet-api.smartbit.com.au/v1/blockchain/pushtx'
 const urlChainSo = 'https://chain.so/api/v2/send_tx/'
@@ -82,8 +82,8 @@ export async function initBitcoinAddress() {
 }
 
 export async function getLastTransactionData(): Promise<any> {
-  return new Promise((resolve, reject) => {
-    initBitcoinAddress().then(async () => {
+  return new Promise(async (resolve, reject) => {
+    await initBitcoinAddress()
       const requestUrl: string = 'https://chain.so/api/v2/get_tx_unspent/' + NETWORK + '/' + myAddr
       console.log('GET LAST TRANSACTION DATA', requestUrl)
       console.log('ADDRESS AT THE MOMENT', myAddr)
@@ -91,13 +91,13 @@ export async function getLastTransactionData(): Promise<any> {
       try {
         const response = await webRequest.get(requestUrl)
         console.log('Raw response: ' + response.content)
-        console.log('Response of last tx: ' + JSON.parse(response.content).data.txs)
+        //console.log('Response of last tx: ' + JSON.parse(response.content).data.txs)
         resolve(response)
       } catch (error) {
          reject(error)
       }
     })
-  })
+
 
 
 }
@@ -176,7 +176,7 @@ for (let tx in inputs) {
   let hashForSig = transaction.tx.hashForSignature(Number(tx), Buffer.from(Object(utxos[Number(tx)]).script_hex),Transaction.SIGHASH_ALL)
   console.log('Hash for sig in for: ' + hashForSig.toString('hex'))
 }
-let key = await CCID.sig(0,paymentAdress,satoshi.toBitcoin(transactionAmount))
+let key:any = await getSignatureKostil(0,paymentAdress,satoshi.toBitcoin(transactionAmount))
 console.log('SLICED',key.slice(3,35))
 let wifKey = wif.encode(128,key.slice(3,35),true)
 let alice = ECPair.fromWIF(wifKey,network)
@@ -506,10 +506,11 @@ function sendTransaction(transactionHash: string) {
   })
 }
 */
-export function handleBitcoin(paymentAdress: string, amount: number, transactionFee: number, redirect: any) {
+export async function handleBitcoin(paymentAdress: string, amount: number, transactionFee: number, redirect: any) {
   console.log('In handle')
   // let code = 128
   getLastTransactionData().then(Response => {
+    console.log('GOR RESPONSE')
     let respData = JSON.parse(Response.content)
     console.log('RespData: ' + respData.data)
     console.log('Resp status: ' + respData.status)

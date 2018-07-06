@@ -23,16 +23,20 @@ interface IAppState {
     BTCBalance: number,
     ETHBalance: number,
     LTCBalance: number,
+    XRPBalance: number,
     BTCPrice: number,
     ETHPrice: number,
     LTCPrice: number,
+    XRPPrice: number,
     totalBalance: number,
     BTCHourChange: number,
     ETHHourChange: number,
     LTCHourChange: number,
+    XRPHourChange: number,
     BTCLastTx: Array<any>,
     LTCLastTx: Array<any>,
     ETHLastTx: Array<any>,
+    XRPLastTx: Array<any>,
     connection: boolean,
     status: boolean,
     redirect: boolean,
@@ -93,7 +97,11 @@ export default class App extends React.Component<any, IAppState> {
           path: '/ripple-window',
           exact: true,
           sidebar: () => <SidebarNoButtons total = {this.state.totalBalance} totalPercent = {this.state.totalPercentage}/>,
-          main: () => <RippleWindow/>
+          main: () => <RippleWindow balance =  {this.state.XRPBalance} price = {this.state.XRPPrice} hourChange = {this.state.XRPHourChange} lastTx = {this.state.XRPLastTx.sort((a: any, b:any) => {
+            let c = new Date(a.Date).getTime()
+            let d = new Date(b.Date).getTime()
+            return d - c
+          })} transactions = {this.getTransactions} redirect = {this.redirectToTransactionsuccess} reset = {this.resetRedirect}/>
         }
       ]
     constructor(props: any) {
@@ -102,16 +110,20 @@ export default class App extends React.Component<any, IAppState> {
             BTCBalance: 0,
             ETHBalance: 0,
             LTCBalance: 0,
+            XRPBalance: 0,
             BTCPrice: 0,
             ETHPrice: 0,
             LTCPrice: 0,
+            XRPPrice: 0,
             totalBalance: 0,
             BTCHourChange: 0,
             LTCHourChange: 0,
             ETHHourChange: 0,
+            XRPHourChange: 0,
             LTCLastTx: [],
             BTCLastTx: [],
             ETHLastTx: [],
+            XRPLastTx: [],
             connection: false,
             status: false,
             redirect: false,

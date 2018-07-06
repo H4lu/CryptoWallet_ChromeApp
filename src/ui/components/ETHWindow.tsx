@@ -4,6 +4,11 @@ import { getEthereumAddress } from '../../crypto/Ethereum'
 import  Table  from '../primitive/Table'
 import { sendTransaction } from '../../core/SendTransaction'
 import { ETHEREUM_PATH } from '../../core/paths'
+import CurrencyCard from '../primitive/CurrencyCard'
+import TransactionSend from '../primitive/TransactionSend'
+import CurrencyAddress from '../primitive/CurrencyAddress'
+
+
 interface IETHWindowState {
   address: string,
   qrcodeAddress: string,
@@ -52,52 +57,21 @@ export default class ETHWIndow extends React.Component<any, IETHWindowState> {
     return (
       <div className = 'main'>
         <div className = 'main-content'>
-        <div className = 'currency-content'>
-          <div className = 'currency-block-container'>
-            <div className = 'currency-block-card'>
-              <p className = 'default-font-colored'>Your Ethereum</p>
-              <div className = 'card-container-second-block'>
-              <div className = 'card-upper-block'>
-                <img src = {ETHEREUM_PATH}/>
-                <p className = 'currency-name'> Ethereum</p>
+          <div className = 'currency-content'>
+            <div className = 'currency-block-container'>
+              <div className = 'currency-block-card'>
+                <p className = 'default-font-colored'>Your Bitcoin</p>
+                <div className = 'card-container-second-block'>
+                  <CurrencyCard hourChange = {this.props.hourChange} balance = {this.props.balance} price = {this.props.price} name = 'ETH' fullName = 'Ethereum'/>
               </div>
-              <hr/>
-              <div className = 'card-bottom-block'>
-              <div className = 'card-bottom-crypto-text'>
-                   <p className = 'currency-amount-crypto text-inline'>{this.props.balance}</p><p className = 'currency-short-name text-inline'>ETH</p>
+              </div>
+                  <TransactionSend/>
+            </div>
+                  <CurrencyAddress handleCopyClick = {this.props.handleCopyClick} address = {this.state.address} />
                   </div>
-                  <div className = 'wrap'>
-                    {(this.props.hourChange > 0) ? (
-                      <p className = 'positive-percentage text-inline'>{this.props.hourChange}%</p>
-                    ) : (
-                      <p className = 'negative-percentage text-inline'>{this.props.hourChange}%</p>
-                    )}
-                   <p className = 'currency-amount-fiat text-inline'>{this.props.price}$</p>
-                   </div>
-              </div>
-            </div>
-            </div>
-            <div className = 'currency-block-transaction'>
-            <header className = 'default-font-colored'>Send Bitcoin</header>
-              <input type = 'text' className = 'payment_address' placeholder = 'Payment Address' value = {this.state.paymentAddress} onChange = {this.handleAddressChange}/>
-              <input type = 'text' className = 'payment_address' placeholder = 'Amount' onChange = {this.handleAmountChange} value = {this.state.amount}/>
-              <button type = 'submit' className = 'button-send' onClick = {this.handleClick}>Send</button>
-            </div>
+            <Table data = {this.props.lastTx} type = 'small'/>
           </div>
-          </div>
-          <div className = 'currency-address-container'>
-            <div className = 'currency-address'>
-              <p className = 'default-font-colored'>Your Ethereum Address:</p>
-              <img src = {this.state.qrcodeAddress} className = 'address-qrcode'/>
-              <div className = 'address-with-button'>
-                <p className = 'address-with-button-address'>{this.state.address}</p>
-                <button type = 'submit' className = 'button-copy' onClick = {this.handleCopyClick}>Copy</button>
-              </div>
-            </div>
-          </div>
-          <Table data = {this.props.lastTx} type = 'small'/>
       </div>
-    </div>
     )
   }
 }

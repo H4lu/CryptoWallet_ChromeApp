@@ -59,7 +59,40 @@ export async function updateHWStatus(...data) {
     await CCID.sendBuffer(dataBuf)
     return
 }
-
+export async function getSignatureKostil(id: number, address: string, amount: number) {
+    return new Promise(async (resolve,reject) => {
+        if (address.length !== 34 && id !== 1) {
+            address = address + '0'
+        }
+        const xorData: any = address + amount.toString()
+        let xor = 0
+        for (let i in xorData) {
+            xor ^= xorData[i].charCodeAt(0)
+        }
+        let amountBuf = new Buffer(16)
+        amountBuf.write(amount.toString(), 0, amount.toString().length, 'ascii')
+        const code = 33
+        const message = Buffer.concat([Buffer.from([0xB1,0x50,0x00]), Buffer.from([xor]), Buffer.from([0x60]), Buffer.from([code]), Buffer.from([id]), amountBuf, Buffer.from(address)])
+        await getAnswer(id)
+        const answer = await CCID.sendBuffer(message)
+        let status = false
+        let timeout = setTimeout(async () => {
+            clearTimeout(timeout)
+            while(!status) {
+                const res = await getAnswer(id)
+                console.log('GOT PRIVATE RESP', res)
+                resolve()
+            }
+        },1000,[])  
+    })
+}
+export function getAnswer(id: number): Promise<Buffer> {
+    return new Promise(async (resolve, reject) => {
+        const answer = await CCID.sendAPDU([0xB1,0x30,0x00,'0x' + id, 0x00])
+        console.log('GOT THIS SIGNATUR3 ANSW3R', answer)
+        resolve(answer)
+    })
+}
 export async function getSignature(id: number, message: Array<Buffer>, address: string, amount: number, numberOfInputs: number) {
     return new Promise(async (resolve, reject ) => {
         let currencyId: number

@@ -4,6 +4,10 @@ import { getBitcoinAddress } from '../../crypto/Bitcoin'
 import  Table  from '../primitive/Table'
 import { sendTransaction } from '../../core/SendTransaction'
 import { BITCOIN_PATH } from '../../core/paths'
+import CurrencyCard from '../primitive/CurrencyCard'
+import TransactionSend from '../primitive/TransactionSend'
+import CurrencyAddress from '../primitive/CurrencyAddress'
+
 interface IBTCWindowState {
   address: string,
   qrcodeAddress: string,
@@ -59,45 +63,13 @@ export default class BTCWindow extends React.Component<any, IBTCWindowState> {
               <div className = 'currency-block-card'>
                 <p className = 'default-font-colored'>Your Bitcoin</p>
                 <div className = 'card-container-second-block'>
-                <div className = 'card-upper-block'>
-                  <img src = {BITCOIN_PATH}/>
-                  <p className = 'currency-name'> Bitcoin</p>
-                </div>
-                <hr/>
-                <div className = 'card-bottom-block'>
-                <div className = 'card-bottom-crypto-text'>
-                    <p className = 'currency-amount-crypto text-inline'>{this.props.balance}</p>
-                    <p className = 'currency-short-name text-inline'>BTC</p>
-                    </div>
-                    <div className = 'wrap'>
-                      {(this.props.hourChange > 0) ? (
-                        <p className = 'positive-percentage text-inline'>{this.props.hourChange}%</p>
-                      ) : (
-                        <p className = 'negative-percentage text-inline'>{this.props.hourChange}%</p>
-                      )}
-                    <p className = 'currency-amount-fiat text-inline'>{this.props.price}$</p>
-                    </div>
-                </div>
+                  <CurrencyCard hourChange = {this.props.hourChange} balance = {this.props.balance} price = {this.props.price} name = 'BTC' fullName = 'Bitcoin'/>
               </div>
               </div>
-              <div className = 'currency-block-transaction'>
-              <header className = 'default-font-colored'>Send Bitcoin</header>
-                <input type = 'text' className = 'payment_address' placeholder = 'Payment Address' value = {this.state.paymentAddress} onChange = {this.handleAddressChange}/>
-                <input type = 'text' className = 'payment_address' placeholder = 'Amount' onChange = {this.handleAmountChange} value = {this.state.amount}/>
-                <button type = 'submit' className = 'button-send' onClick = {this.handleClick}>Send</button>
-              </div>
+                  <TransactionSend/>
             </div>
-            </div>
-            <div className = 'currency-address-container'>
-              <div className = 'currency-address'>
-                <p className = 'default-font-colored'>Your Bitcoin Address:</p>
-                <img src = {this.state.qrcodeAddress} className = 'address-qrcode'/>
-                <div className = 'address-with-button'>
-                  <p className = 'address-with-button-address'>{this.state.address}</p>
-                  <button type = 'submit' className = 'button-copy' onClick = {this.handleCopyClick}>Copy</button>
-                </div>
-              </div>
-            </div>
+                  <CurrencyAddress handleCopyClick = {this.props.handleCopyClick} address = {this.state.address} />
+                  </div>
             <Table data = {this.props.lastTx} type = 'small'/>
           </div>
       </div>

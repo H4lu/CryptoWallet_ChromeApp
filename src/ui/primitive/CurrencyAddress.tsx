@@ -1,6 +1,7 @@
 import * as React from 'react'
+import * as QrCode from 'qrcode.react'
 
-export class CurrencyAddress extends React.Component<any, any> {
+export default class CurrencyAddress extends React.Component<any, any> {
     constructor(props: any) {
         super(props)
 
@@ -10,10 +11,10 @@ export class CurrencyAddress extends React.Component<any, any> {
         return(
             <div className = 'currency-address-container'>
               <div className = 'currency-address'>
-                <p className = 'default-font-colored'>Your Ethereum Address:</p>
-                <img src = {this.state.qrcodeAddress} className = 'address-qrcode'/>
+                <p className = 'default-font-colored'>Your {this.props.fullName} Address:</p>
+                <QrCode value = {this.props.address} className = 'address-qrcode' size = '110'/>
                 <div className = 'address-with-button'>
-                    <p className = 'address-with-button-address'>{this.state.address}</p>
+                    <p className = 'address-with-button-address'>{this.props.address}</p>
                     <button type = 'submit' className = 'button-copy' onClick = {this.props.handleCopyClick}>Copy</button>
                 </div>
               </div>
