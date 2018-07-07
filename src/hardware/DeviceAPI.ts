@@ -93,7 +93,7 @@ export function getAnswer(id: number): Promise<Buffer> {
         resolve(answer)
     })
 }
-export async function getSignature(id: number, message: Array<Buffer>, address: string, amount: number, numberOfInputs: number) {
+export function getSignature(id: number, message: Array<Buffer>, address: string, amount: number, numberOfInputs: number): Promise<Array<Buffer>> {
     return new Promise(async (resolve, reject ) => {
         let currencyId: number
         switch (id) {

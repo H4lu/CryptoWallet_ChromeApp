@@ -11,13 +11,13 @@ import { getLitecoinAddress, getLitecoinLastTx, getLTCBalance, initLitecoinAddre
 import SidebarNoButtons from './components/SidebarNoButtons'
 import SidebarContent from './components/SidebarContent'
 import MainContent from './components/MainContent'
-import LTCWindow from './components/LTCWindow'
 import BTCWindow from './components/BTCWindow'
 import ETHWIndow from './components/ETHWindow'
 import getCurrencyRate from '../core/getCurrencyRate'
 import { getStatus, getAddress, updateHWStatus } from '../hardware/DeviceAPI'
 import { connectToRipple } from '../crypto/Ripple'
 import RippleWindow from '../ui/components/RippleWindow'
+import CurrencyWindow from '../ui/components/CurrencyWindow'
 
 interface IAppState {
     BTCBalance: number,
@@ -67,41 +67,41 @@ export default class App extends React.Component<any, IAppState> {
           path: '/btc-window',
           exact: true,
           sidebar: () => <SidebarNoButtons total = {this.state.totalBalance} totalPercent = {this.state.totalPercentage}/>,
-          main: () => <BTCWindow balance = {this.state.BTCBalance} price = {this.state.BTCPrice} hourChange = {this.state.BTCHourChange} lastTx = {this.state.BTCLastTx.sort((a: any, b: any) => {
+          main: () => <CurrencyWindow name = 'BTC' balance = {this.state.BTCBalance} price = {this.state.BTCPrice} hourChange = {this.state.BTCHourChange} lastTx = {this.state.BTCLastTx.sort((a: any, b: any) => {
             let c = new Date(a.Date).getTime()
             let d = new Date(b.Date).getTime()
             return d - c
-          })} transactions = {this.getTransactions} redirect = {this.redirectToTransactionsuccess} reset = {this.resetRedirect}/>
+          })}  redirect = {this.redirectToTransactionsuccess}/>
         },
         {
           path: '/eth-window',
           exact: true,
           sidebar: () => <SidebarNoButtons total = {this.state.totalBalance} totalPercent = {this.state.totalPercentage}/>,
-          main: () => <ETHWIndow balance = {this.state.ETHBalance} price = {this.state.ETHPrice} hourChange = {this.state.ETHHourChange} lastTx = {this.state.ETHLastTx.sort((a: any, b: any) => {
+          main: () => <CurrencyWindow name = 'ETH' balance = {this.state.ETHBalance} price = {this.state.ETHPrice} hourChange = {this.state.ETHHourChange} lastTx = {this.state.ETHLastTx.sort((a: any, b: any) => {
             let c = new Date(a.Date).getTime()
             let d = new Date(b.Date).getTime()
             return d - c
-          })} redirect = {this.redirectToTransactionsuccess} reset = {this.resetRedirect}/>
+          })}  redirect = {this.redirectToTransactionsuccess}/>
         },
         {
           path: '/ltc-window',
           exact: true,
           sidebar: () => <SidebarNoButtons total = {this.state.totalBalance} totalPercent = {this.state.totalPercentage}/>,
-          main: () => <LTCWindow balance = {this.state.LTCBalance} price = {this.state.LTCPrice} hourChange = {this.state.LTCHourChange} lastTx = {this.state.LTCLastTx.sort((a: any, b: any) => {
+          main: () => <CurrencyWindow name = 'LTC' balance = {this.state.LTCBalance} price = {this.state.LTCPrice} hourChange = {this.state.LTCHourChange} lastTx = {this.state.LTCLastTx.sort((a: any, b: any) => {
             let c = new Date(a.Date).getTime()
             let d = new Date(b.Date).getTime()
             return d - c
-          })} transactions = {this.getTransactions} redirect = {this.redirectToTransactionsuccess} reset = {this.resetRedirect}/>
+          })}  redirect = {this.redirectToTransactionsuccess}/>
         },
         {
           path: '/ripple-window',
           exact: true,
           sidebar: () => <SidebarNoButtons total = {this.state.totalBalance} totalPercent = {this.state.totalPercentage}/>,
-          main: () => <RippleWindow balance =  {this.state.XRPBalance} price = {this.state.XRPPrice} hourChange = {this.state.XRPHourChange} lastTx = {this.state.XRPLastTx.sort((a: any, b:any) => {
+          main: () => <CurrencyWindow name = 'XRP' balance = {this.state.BTCBalance} price = {this.state.BTCPrice} hourChange = {this.state.BTCHourChange} lastTx = {this.state.BTCLastTx.sort((a: any, b: any) => {
             let c = new Date(a.Date).getTime()
             let d = new Date(b.Date).getTime()
             return d - c
-          })} transactions = {this.getTransactions} redirect = {this.redirectToTransactionsuccess} reset = {this.resetRedirect}/>
+          })}  redirect = {this.redirectToTransactionsuccess}/>
         }
       ]
     constructor(props: any) {

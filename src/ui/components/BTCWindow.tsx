@@ -42,7 +42,7 @@ export default class BTCWindow extends React.Component<any, IBTCWindowState> {
     // clipboard.writeText(this.state.address)
   }
   handleClick() {
-    sendTransaction('bitcoin', this.state.paymentAddress, this.state.amount, this.state.fee, this.props.redirect)
+    sendTransaction('bitcoin', this.state.paymentAddress, this.state.amount.toString(), this.state.fee, this.props.redirect)
   }
   handleAmountChange(e: any) {
     this.setState({ amount: e.target.value })
@@ -68,7 +68,7 @@ export default class BTCWindow extends React.Component<any, IBTCWindowState> {
               </div>
                   <TransactionSend/>
             </div>
-                  <CurrencyAddress handleCopyClick = {this.props.handleCopyClick} address = {this.state.address} />
+                  <CurrencyAddress handleCopyClick = {this.handleCopyClick} address = {this.state.address} />
                   </div>
             <Table data = {this.props.lastTx} type = 'small'/>
           </div>

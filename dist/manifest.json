@@ -11,6 +11,8 @@
       "permissions" : [
         "hid",
         "usb",
+        "clipboard-read" ,
+        "clipboard-write",
         {
             "usbDevices": [ 
                 { 
