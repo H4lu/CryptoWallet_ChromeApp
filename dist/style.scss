@@ -1,0 +1,33 @@
+$font-stack: 'Heebo', Arial, Helvetica, Sans-Serif;
+$default-font-color:#4D6F96;
+
+@mixin normalFont($size: 12px, $weight: normal, $color: $default-font-color) {
+    font-family: $font-stack;
+    font-style: normal;
+    font-weight: $weight;
+    line-height: normal;
+    font-size: $size;
+    color: $color;
+
+}
+
+.default-font {
+    @include normalFont(14);
+}
+.default-font-colored {
+    @include normalFont();
+    color: $default-font-color;
+    margin: 10px;
+}
+.info-default-font {
+    @include normalFont();
+    color: #7EAEE6;
+}
+.info-header-font {
+    @include normalFont();
+    color: $default-font-color;
+}
+button {
+    outline: none;
+}
+

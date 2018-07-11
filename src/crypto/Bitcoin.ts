@@ -454,7 +454,12 @@ function sendTransaction(transactionHex: string, redirect: any) {
      }
    })
 }
-
+async function sendTx(transactionHex: string, redirect: any) {
+  const url = urlChainSo + NETWORK
+  const response = await webRequest.post(url, { headers:{ 'content-type': 'application/json'} }, { body: { 'tx': transactionHex} })
+  const parsedResponse = JSON.parse(response.content)
+  console.log('PARSED IN ASYNC SEND', parsedResponse)
+}
 function sendByBlockcypher(transactionHex: string, redirect: any) {
   Request.post({
     url: 'https://api.blockcypher.com/v1/btc/test3/txs/push',
