@@ -1,13 +1,15 @@
 const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     mode: 'production',
     plugins: [
         new MiniCssExtractPlugin({
             filename: "[name].css"
-        })
+        }),
+        new ExtractTextPlugin({ filename: 'styles.css', allChunks: true })
     ],
     entry: {
         hardware: path.join(__dirname, '../src/hardware/CCID.ts'),
@@ -53,6 +55,25 @@ module.exports = {
                     "css-loader"
                 ]
             },
+            {
+                test: /\.scss$/,
+                exclude: /node_modules/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: true,
+                                sourceMap: true,
+                                importLoaders: 2,
+                                localIdentName: '[name]_[local]_[hash:base64:5]'
+                            }
+                        },
+                        'sass-loader'
+                    ]
+                })
+            }
             /*{
                 test: /\.css$/,
                 exclude: /node_modules/,
@@ -69,6 +90,6 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js','.scss']
     }
 };

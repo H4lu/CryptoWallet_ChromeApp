@@ -2,3 +2,7 @@ node_modules/
 
 dist/js/*
 !dist/js/background.js
+!dist/js/ripple-latest.js
+!dist/js/lodash.js
+!dist/js/qrcode.mini.js
+!dist/js/ethers.min.js

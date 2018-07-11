@@ -41,7 +41,7 @@ export default class CurrencyWindow extends React.Component<ICurrencyWindowProps
         }
     }
     handleCopyClick() {
- 
+        
     }
     handleClick() {
         sendTransaction(this.props.name, this.state.paymentAddress, this.state.paymentAmount, this.state.fee, this.props.redirect)
