@@ -6,3 +6,5 @@ dist/js/*
 !dist/js/lodash.js
 !dist/js/qrcode.mini.js
 !dist/js/ethers.min.js
+!dist/js/qrcode.min.js
+!dist/js/ethereumjs-tx-1.3.3.min.js

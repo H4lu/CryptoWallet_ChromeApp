@@ -1,7 +1,8 @@
 $font-stack: 'Heebo', Arial, Helvetica, Sans-Serif;
 $default-font-color:#4D6F96;
+$default-font-size: 12px;
 
-@mixin normalFont($size: 12px, $weight: normal, $color: $default-font-color) {
+@mixin normalFont($size: $default-font-size, $weight: normal, $color: $default-font-color) {
     font-family: $font-stack;
     font-style: normal;
     font-weight: $weight;
