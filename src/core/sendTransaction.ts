@@ -1,4 +1,4 @@
-import { handleBitcoin } from '../crypto/BitCoin'
+import { handleBitcoin } from '../crypto/Bitcoin'
 import { handleEthereum } from '../crypto/Ethereum'
 import { handleLitecoin } from '../crypto/Litecoin'
 
